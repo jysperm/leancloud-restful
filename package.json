@@ -1,0 +1,17 @@
+{
+  "name": "leancloud-restful",
+  "private": true,
+  "version": "0.1.0",
+  "homepage": "https://leancloud-restful.leanapp.cn",
+  "scripts": {
+    "start": "http-server -p 3000"
+  },
+  "devDependencies": {
+    "api-console": "^3.0.4",
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^2.0.0"
+  },
+  "dependencies": {
+    "http-server": "^0.9.0"
+  }
+}

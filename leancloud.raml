@@ -1,0 +1,96 @@
+#%RAML 1.0
+title: LeanCloud
+version: 1.1
+# baseUri: https://leancloud.cn/{version}
+baseUri: https://leancloud.cn/1.1
+protocols: [ HTTPS ]
+mediaType: application/json
+securedBy: [appKey, appKeySign, appMasterKey, appMasterKeySign]
+
+description: |
+  REST API 可以让你用任何支持发送 HTTP 请求的设备来与 LeanCloud 进行交互，你可以使用 REST API 做很多事情，比如：
+
+  - 一个移动网站可以通过 JavaScript 来获取 LeanCloud 上的数据.
+  - 一个网站可以展示来自 LeanCloud 的数据。
+  - 你可以上传大量的数据，之后可以被一个移动 App 读取。
+  - 你可以下载最近的数据来进行你自定义的分析统计。
+  - 使用任何语言写的程序都可以操作 LeanCloud 上的数据。
+  - 如果你不再需要使用 LeanCloud，你可以导出你所有的数据。
+
+documentation:
+  - title: API Version
+    content: |
+      - **1.1** 2014 年 8 月 13 号发布，修复 Date 类型和 createdAt、updatedAt 的时区问题，返回标准 UTC 时间。
+      - **1.0** 存在时间不准确的 Bug，实际返回的 Date 类型和 createdAt、updatedAt 都是北京时间，**不推荐再使用**。
+
+securitySchemes:
+  appKey:
+    type: x-leancloud-app-key
+    describedBy:
+      headers:
+        X-LC-Id: appId
+        X-LC-Key: appKey
+      responses:
+        401:
+
+  appKeySign:
+    type: x-leancloud-app-key-sign
+    describedBy:
+      headers:
+        X-LC-Id: appId
+        X-LC-Sign: appKeySign
+      responses:
+        401:
+
+  appMasterKey:
+    type: x-leancloud-master-key
+    describedBy:
+      headers:
+        X-LC-Id: appId
+        X-LC-Key: appKeyWithMaster
+      responses:
+        401:
+
+  appMasterKeySign:
+    type: x-leancloud-master-key-sign
+    describedBy:
+      headers:
+        X-LC-Id: appId
+        X-LC-Sign: appMasterKeySign
+      responses:
+        401:
+
+types:
+  appId: string
+  appKey: string
+  appKeySign: string
+  appKeyWithMaster: string
+  appMasterKeySign: string
+
+traits:
+
+resourceTypes:
+  Class:
+    post:
+      queryParameters:
+        fetchWhenSave: boolean
+      description: 创建对象。
+      body: object
+      responses:
+        201:
+          description: 创建成功。
+          headers:
+            Location: string
+
+    get:
+
+annotationTypes:
+
+/classes/{className}:
+  type: Class
+
+/users:
+
+/push:
+
+/functions/{functionName}:
